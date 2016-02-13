@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class CommandContext {
     private final Command command;
-    private final Map<String, Object> flags;
-    private final List<Object> params;
+    private final Map<String, String> flags;
+    private final List<String> params;
 
-    public CommandContext(Command command, Map<String, Object> flags, List<Object> params) {
+    public CommandContext(Command command, Map<String, String> flags, List<String> params) {
         this.command = command;
         this.flags = flags;
         this.params = params;
@@ -20,13 +20,17 @@ public class CommandContext {
         return this.command;
     }
 
-    // Flags - Objects
-    public Object getFlag(String flag) {
+    // Flags - Strings
+    public String getFlag(String flag) {
         return this.getFlag(flag, null);
     }
 
-    public Object getFlag(String flag, Object def) {
-        return this.flags.getOrDefault(flag, def);
+    public String getFlag(String flag, String def) {
+        if (this.flags.containsKey(flag)) {
+            return this.flags.get(flag);
+        } else {
+            return def;
+        }
     }
 
     // Flags - Doubles
@@ -35,7 +39,7 @@ public class CommandContext {
     }
 
     public double getFlagDouble(String flag, double def) {
-        return (double) this.getFlag(flag, def);
+        return Double.parseDouble(this.getFlag(flag, String.valueOf(def)));
     }
 
     // Flags - Integers
@@ -44,29 +48,28 @@ public class CommandContext {
     }
 
     public int getFlagInt(String flag, int def) {
-        return (int) this.getFlag(flag, def);
+        return Integer.parseInt(this.getFlag(flag, String.valueOf(def)));
     }
 
-    // Flags - Strings
-    public String getFlagText(String flag) {
-        return this.getFlagText(flag, null);
-    }
-
-    public String getFlagText(String flag, String def) {
-        return (String) this.getFlag(flag, def);
-    }
-
-    // Params - Objects
-    public Object getParam(int index) {
+    // Params - Strings
+    public String getParam(int index) {
         return this.getParam(index, null);
     }
 
-    public Object getParam(int index, Object def) {
+    public String getParam(int index, String def) {
         if (this.params.size() <= index) {
             return def;
         }
 
         return this.params.get(index);
+    }
+
+    public String getParams(int from) {
+        return this.getParams(from, this.params.size() - 1);
+    }
+
+    public String getParams(int from, int to) {
+        return StringUtils.join(this.params.subList(from, to), " ");
     }
 
     // Params - Doubles
@@ -75,16 +78,7 @@ public class CommandContext {
     }
 
     public double getParamDouble(int index, double def) {
-        return (double) this.getParam(index, def);
-    }
-
-    // Params - Build a full text
-    public String getParamFullText(int from) throws IndexOutOfBoundsException {
-        return this.getParamFullText(from, this.params.size());
-    }
-
-    public String getParamFullText(int from, int to) throws IndexOutOfBoundsException {
-        return StringUtils.join(this.params.subList(from, to), " ");
+        return Double.parseDouble(this.getParam(index, String.valueOf(def)));
     }
 
     // Params - Integers
@@ -93,20 +87,11 @@ public class CommandContext {
     }
 
     public int getParamInt(int index, int def) {
-        return (int) this.getParam(index, def);
+        return Integer.parseInt(this.getParam(index, String.valueOf(def)));
     }
 
     public int getParamsLength() {
         return this.params.size();
-    }
-
-    // Params - Strings
-    public String getParamText(int index) {
-        return this.getParamText(index, null);
-    }
-
-    public String getParamText(int index, String def) {
-        return (String) this.getParam(index, def);
     }
 
     public boolean hasFlag(String flag) {

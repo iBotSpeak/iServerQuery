@@ -1,7 +1,7 @@
 package pl.themolka.iserverquery.command;
 
 import pl.themolka.iserverquery.ServerQuery;
-
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,18 +30,12 @@ public class CommandSystem {
     }
 
     public void handleCommand(CommandSender sender, CommandContext context) {
-        Command command = this.getCommand(context.getCommand().getCommand());
-
         try {
-            if (command == null) {
-                throw new CommandException(0); // command was not found
-            }
-
-            CommandHandleEvent event = new CommandHandleEvent(command, context, sender);
+            CommandHandleEvent event = new CommandHandleEvent(context.getCommand(), context, sender);
             this.serverQuery.getEvents().post(event);
 
             if (!event.isCanceled()) {
-                command.handleCommand(event.getSender(), event.getContext());
+                context.getCommand().handleCommand(event.getSender(), event.getContext());
             }
         } catch (CommandException ex) {
             sender.sendMessage("Error: " + ex.getMessage());
@@ -51,6 +45,28 @@ public class CommandSystem {
             sender.sendMessage(String.format("Internal command error - %s. See the logs.", ex.getMessage()));
             // TODO log
         }
+    }
+
+    public void handleCommand(CommandSender sender, String commandLine, CommandContext.IContextParser parser) {
+        if (!commandLine.startsWith(this.getPrefix())) {
+            return;
+        }
+
+        String[] args = commandLine.split(" ");
+        String name = args[0].substring(this.getPrefix().length());
+
+        Command command = this.getCommand(name);
+        if (command == null) {
+            sender.sendMessage("Specified command doesn't exists. Type \"" + this.getPrefix() + "help\" for help.");
+            return;
+        }
+
+        String[] commandArgs = new String[0];
+        if (args.length > 1) {
+            commandArgs = Arrays.copyOfRange(args, 1, args.length);
+        }
+
+        this.handleCommand(sender, CommandContext.parse(command, commandArgs, parser));
     }
 
     public void registerCommand(Command command) {
@@ -68,6 +84,7 @@ public class CommandSystem {
         for (int i = 0; i < 10; i++) {
             if (this.getCommand(name) == null) {
                 this.injectCommand(name, command, override);
+                break;
             }
 
             name = OVERRIDE_DEFAULT_PREFIX + name;

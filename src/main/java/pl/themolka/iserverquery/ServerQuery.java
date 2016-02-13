@@ -6,30 +6,15 @@ import pl.themolka.iserverquery.server.Server;
 import pl.themolka.iserverquery.util.Platform;
 
 public class ServerQuery {
-    private final String build;
-    private final CommandSystem commands;
-    private final EventSystem events;
-    private final String identifier;
-    private final Platform platform;
-    private final Server server;
-    private final String version;
+    private String build;
+    private CommandSystem commands;
+    private EventSystem events;
+    private String identifier;
+    private Platform platform;
+    private Server server;
+    private String version;
 
-    public ServerQuery(
-            String build,
-            CommandSystem commands,
-            EventSystem events,
-            String identifier,
-            Platform platform,
-            Server server,
-            String version
-    ) {
-        this.build = build;
-        this.commands = commands;
-        this.events = events;
-        this.identifier = identifier;
-        this.platform = platform;
-        this.server = server;
-        this.version = version;
+    public ServerQuery() {
     }
 
     public String getBuildVersion() {
@@ -58,5 +43,23 @@ public class ServerQuery {
 
     public String getVersion() {
         return this.version;
+    }
+
+    public void setServerQuery(
+            String build,
+            CommandSystem commands,
+            EventSystem events,
+            String identifier,
+            Platform platform,
+            Server server,
+            String version
+    ) {
+        this.build = build;
+        this.commands = commands;
+        this.events = events;
+        this.identifier = identifier;
+        this.platform = platform;
+        this.server = server;
+        this.version = version;
     }
 }

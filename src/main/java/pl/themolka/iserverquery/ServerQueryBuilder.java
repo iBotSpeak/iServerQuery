@@ -35,7 +35,8 @@ public class ServerQueryBuilder implements Builder<ServerQuery> {
             throw new IllegalArgumentException("server variable is not set");
         }
 
-        return new ServerQuery(
+        ServerQuery serverQuery = new ServerQuery();
+        serverQuery.setServerQuery(
                 this.build,
                 this.commands,
                 this.events,
@@ -44,6 +45,8 @@ public class ServerQueryBuilder implements Builder<ServerQuery> {
                 this.server,
                 this.version
         );
+
+        return serverQuery;
     }
 
     public ServerQueryBuilder build(String build) {
