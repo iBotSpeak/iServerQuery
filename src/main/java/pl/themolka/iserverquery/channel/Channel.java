@@ -38,6 +38,8 @@ public interface Channel extends Fetchable, Updatable {
 
     boolean isSemiPermanent();
 
+    boolean isTemporary();
+
     boolean isUnlimited();
 
     void setDefault(boolean isDefault);
@@ -59,6 +61,8 @@ public interface Channel extends Fetchable, Updatable {
     void setSemiPermanent(boolean semi);
 
     void setTalkPower(int talkPower);
+
+    void setTemporary(boolean temporary);
 
     void setTopic(String message);
 

@@ -17,7 +17,7 @@ public interface ConnectedClient extends Client, CommandSender {
 
     int getTalkRequest();
 
-    String getTaskRequestMessage();
+    String getTalkRequestMessage();
 
     String getVersion();
 

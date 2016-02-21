@@ -28,4 +28,8 @@ public interface Server extends Fetchable {
     Collection<ConnectedClient> getConnectedClients();
 
     Channel getDefaultChannel();
+
+    int getReservedSlots();
+
+    int getSlots();
 }
