@@ -25,7 +25,7 @@ public class BBCodeTag extends BBTag implements Message {
         return BBCode.toString(this);
     }
 
-    public abstract class PreparedTag extends BBCodeTag {
+    public static abstract class PreparedTag extends BBCodeTag {
         public PreparedTag() {
             super();
         }
