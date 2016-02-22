@@ -5,61 +5,30 @@ import pl.themolka.iserverquery.event.EventSystem;
 import pl.themolka.iserverquery.server.Server;
 import pl.themolka.iserverquery.util.Platform;
 
-public class ServerQuery {
-    private String build;
-    private CommandSystem commands;
-    private EventSystem events;
-    private String identifier;
-    private Platform platform;
-    private Server server;
-    private String version;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.nio.charset.Charset;
 
-    public ServerQuery() {
-    }
+public interface ServerQuery {
+    String getBuild();
 
-    public String getBuildVersion() {
-        return this.build;
-    }
+    CommandSystem getCommands();
 
-    public CommandSystem getCommands() {
-        return this.commands;
-    }
+    Charset getEncoding();
 
-    public EventSystem getEvents() {
-        return this.events;
-    }
+    EventSystem getEvents();
 
-    public final String getIdentifier() {
-        return this.identifier;
-    }
+    InetAddress getHost();
 
-    public Platform getPlatform() {
-        return this.platform;
-    }
+    String getIdentifier();
 
-    public Server getServer() {
-        return this.server;
-    }
+    Platform getPlatform();
 
-    public String getVersion() {
-        return this.version;
-    }
+    int getPort();
 
-    public void setServerQuery(
-            String build,
-            CommandSystem commands,
-            EventSystem events,
-            String identifier,
-            Platform platform,
-            Server server,
-            String version
-    ) {
-        this.build = build;
-        this.commands = commands;
-        this.events = events;
-        this.identifier = identifier;
-        this.platform = platform;
-        this.server = server;
-        this.version = version;
-    }
+    Server getServer();
+
+    Socket getSocket();
+
+    String getVersion();
 }
