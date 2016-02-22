@@ -31,4 +31,16 @@ public interface ServerQuery {
     Socket getSocket();
 
     String getVersion();
+
+    void login(String username, String password);
+
+    void logout();
+
+    void selectById(int serverId, boolean virtual);
+
+    void selectByPort(int port, boolean virtual);
+
+    void start();
+
+    void stop();
 }
