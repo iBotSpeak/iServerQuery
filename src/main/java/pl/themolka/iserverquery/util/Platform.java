@@ -3,7 +3,6 @@ package pl.themolka.iserverquery.util;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Platform {
-
     public static final Platform ANDROID = new Platform("android", "Android");
     public static final Platform IOS = new Platform("ios", "iOS");
     public static final Platform LINUX = new Platform("unix", "Linux");
@@ -93,10 +92,5 @@ public class Platform {
         }
 
         return new Platform(name.toLowerCase(), name);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(System.getProperty("os.name"));
-        System.out.println(fromSystem());
     }
 }
