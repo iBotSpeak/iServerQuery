@@ -3,9 +3,10 @@ package pl.themolka.iserverquery;
 import pl.themolka.iserverquery.command.CommandSystem;
 import pl.themolka.iserverquery.event.EventSystem;
 import pl.themolka.iserverquery.server.Server;
+import pl.themolka.iserverquery.text.QueryTextEncoding;
 import pl.themolka.iserverquery.util.Platform;
 
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.charset.Charset;
 
@@ -18,17 +19,17 @@ public interface ServerQuery {
 
     EventSystem getEvents();
 
-    InetAddress getHost();
+    InetSocketAddress getHost();
 
     String getIdentifier();
 
     Platform getPlatform();
 
-    int getPort();
-
     Server getServer();
 
     Socket getSocket();
+
+    QueryTextEncoding getTextEncoding();
 
     String getVersion();
 
