@@ -33,6 +33,15 @@ public class CommandContext {
         }
     }
 
+    // Flags = Booleans
+    public boolean getFlagBoolean(String flag) {
+        return this.getFlagBoolean(flag, false);
+    }
+
+    public boolean getFlagBoolean(String flag, boolean def) {
+        return this.parseBoolean(this.getFlag(flag, String.valueOf(def)), def);
+    }
+
     // Flags - Doubles
     public double getFlagDouble(String flag) {
         return this.getFlagDouble(flag, 0.0);
@@ -72,6 +81,15 @@ public class CommandContext {
         return StringUtils.join(this.params.subList(from, to), " ");
     }
 
+    // Params = Booleans
+    public boolean getParamBoolean(int index) {
+        return this.getParamBoolean(index, false);
+    }
+
+    public boolean getParamBoolean(int index, boolean def) {
+        return this.parseBoolean(this.getParam(index, String.valueOf(def)), def);
+    }
+
     // Params - Doubles
     public double getParamDouble(int index) {
         return this.getParamDouble(index, 0.0);
@@ -100,6 +118,16 @@ public class CommandContext {
 
     public boolean hasFlagValue(String flag) {
         return this.getFlag(flag) != null;
+    }
+
+    protected Boolean parseBoolean(String bool, Boolean def) {
+        if (bool.equals("true") || bool.equals("1") || bool.equals("yes") || bool.equals("on")) {
+            return Boolean.TRUE;
+        } else if (bool.equals("false") || bool.equals("0") || bool.equals("no") || bool.equals("off")) {
+            return Boolean.FALSE;
+        } else {
+            return def;
+        }
     }
 
     public static CommandContext parse(Command command, String[] args) {

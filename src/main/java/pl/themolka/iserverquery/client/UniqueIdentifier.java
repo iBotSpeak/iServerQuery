@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class UniqueIdentifier {
     private String identifier;
 
-    public UniqueIdentifier(String identifier) {
+    protected UniqueIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
@@ -26,5 +26,9 @@ public class UniqueIdentifier {
         return new ToStringBuilder(this)
                 .append(this.identifier)
                 .build();
+    }
+
+    public static UniqueIdentifier valueOf(String identifier) {
+        return new UniqueIdentifier(identifier);
     }
 }

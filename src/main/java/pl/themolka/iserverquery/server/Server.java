@@ -9,6 +9,8 @@ import pl.themolka.iserverquery.io.Fetchable;
 import java.util.Collection;
 
 public interface Server extends Fetchable {
+    void createChannel(Channel channel);
+
     ConnectedClient findConnectedClient(String username);
 
     Channel getChannel(int id);
@@ -19,7 +21,7 @@ public interface Server extends Fetchable {
 
     Client getClient(UniqueIdentifier identifier);
 
-    ConnectedClient getConnectedClient(int databaseId);
+    ConnectedClient getConnectedClient(int id);
 
     ConnectedClient getConnectedClient(UniqueIdentifier identifier);
 

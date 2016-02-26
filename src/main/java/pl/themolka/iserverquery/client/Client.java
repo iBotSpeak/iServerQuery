@@ -8,6 +8,8 @@ public interface Client extends Fetchable, Updatable {
 
     String getDescription();
 
+    int getId();
+
     UniqueIdentifier getIdentifier();
 
     String getUsername();
