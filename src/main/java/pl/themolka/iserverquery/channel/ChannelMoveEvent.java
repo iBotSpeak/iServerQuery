@@ -1,11 +1,15 @@
 package pl.themolka.iserverquery.channel;
 
 public class ChannelMoveEvent extends ChannelEditEvent {
-    public ChannelMoveEvent(Channel channel) {
+    private final int order;
+
+    public ChannelMoveEvent(Channel channel, int order) {
         super(channel);
+
+        this.order = order;
     }
 
     public int getOrder() {
-        return this.getChannel().getOrder();
+        return this.order;
     }
 }

@@ -3,7 +3,6 @@ package pl.themolka.iserverquery;
 import pl.themolka.iserverquery.command.CommandSystem;
 import pl.themolka.iserverquery.command.Console;
 import pl.themolka.iserverquery.event.EventSystem;
-import pl.themolka.iserverquery.io.ResponseListener;
 import pl.themolka.iserverquery.server.Server;
 import pl.themolka.iserverquery.text.QueryTextEncoding;
 import pl.themolka.iserverquery.util.Platform;
@@ -26,8 +25,6 @@ public interface ServerQuery {
 
     InetSocketAddress getHost();
 
-    String getIdentifier();
-
     Platform getPlatform();
 
     Server getServer();
@@ -47,8 +44,6 @@ public interface ServerQuery {
     void logout();
 
     void query(String query);
-
-    void registerResponse(String command, ResponseListener listener);
 
     void selectById(int serverId, boolean virtual);
 

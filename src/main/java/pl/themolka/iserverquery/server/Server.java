@@ -17,6 +17,8 @@ public interface Server extends Fetchable {
 
     Channel getChannel(String name);
 
+    Collection<Channel> getChannels();
+
     Client getClient(int databaseId);
 
     Client getClient(UniqueIdentifier identifier);

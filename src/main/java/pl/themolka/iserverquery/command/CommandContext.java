@@ -74,11 +74,15 @@ public class CommandContext {
     }
 
     public String getParams(int from) {
-        return this.getParams(from, this.params.size() - 1);
+        return this.getParams(from, this.params.size());
     }
 
     public String getParams(int from, int to) {
-        return StringUtils.join(this.params.subList(from, to), " ");
+        try {
+            return StringUtils.join(this.params.subList(from, to), " ");
+        } catch (IndexOutOfBoundsException ex) {
+            return null;
+        }
     }
 
     // Params = Booleans

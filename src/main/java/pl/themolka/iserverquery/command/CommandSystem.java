@@ -10,7 +10,7 @@ public class CommandSystem {
     public static final String OVERRIDE_DEFAULT_PREFIX = ":";
     private final ServerQuery serverQuery;
 
-    private final Map<String, Command> commands = new HashMap<>();
+    protected final Map<String, Command> commands = new HashMap<>();
     private String prefix = DEFAULT_PREFIX;
 
     public CommandSystem(ServerQuery serverQuery) {

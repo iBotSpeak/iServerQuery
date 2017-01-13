@@ -6,7 +6,7 @@ public class ShutdownHook extends Thread {
     protected final ServerQuery serverQuery;
 
     public ShutdownHook(ServerQuery serverQuery) {
-        super(serverQuery.getIdentifier() + " Shutdown Hook");
+        super(serverQuery.toString() + " Shutdown Hook Thread");
 
         this.serverQuery = serverQuery;
     }
